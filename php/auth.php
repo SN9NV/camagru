@@ -1,16 +1,17 @@
 <?php
 function auth ($login, $passwd) {
-	$file = '../private/passwd';
 	$passwd = hash('whirlpool', $passwd);
-	if ($users = file_get_contents($file)) {
-		$users = unserialize($users);
-		foreach ($users as $user) {
-			if ($user['login'] == $login) {
-				if ($user['passwd'] == $passwd)
-					return true;
-			}
-		}
+	try {
+		$conn = new PDO("mysql:host='localhost';dbname='camagru'", "root", "sparewheel");
+		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$sql = $conn->prepare("SELECT $login FROM users WHERE passwd LIKE $passwd");
+		$sql->execute();
+		$res = ($sql->rowCount() == 1);
+		$conn = null;
+		return $res;
 	}
-	return false;
+	catch(PDOException $e) {
+		error_log($e, 3, "/home/angus/Documents/wtc/camagru/log/errors.log");
+	}
 }
 ?>

@@ -19,6 +19,11 @@ footer {
 	background-color: teal;
 }
 
+.input-error {
+	border-color: tomato;
+	background-color: tomato;
+}
+
 .padding {
 	margin: 8px;
 }
