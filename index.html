@@ -11,17 +11,14 @@
 	<body>
 		<header class="nav row wrap">
 			<a href="#" class="padding"><img class="logo" src="img/logo.png" /></a>
-			<div class="padding">
-				<input id="username" type="text" placeholder="Username" />
-				<input id="password" type="text" placeholder="Password" />
-				<input type="button" name="name" value="Log In" onclick="logIn()">
+			<div id="login" class="padding">
+				<input id="username" type="text" placeholder="Username" tabindex="1"/>
+				<input id="password" type="text" placeholder="Password" tabindex="2"/>
+				<input type="submit" name="name" value="Log In" onclick="logIn()" tabindex="3">
 			</div>
 		</header>
 
-		<section class="content">
-			<div class="gallery">
-
-			</div>
+		<section id="main" class="content">
 		</section>
 
 		<footer>

@@ -21,7 +21,7 @@ try {
 		path VARCHAR(128) NOT NULL,
 		date datetime NOT NULL)");
 }
-catch (Exception $e) {
+catch (PDOException $e) {
 	error_log($e, 3, "/home/angus/Documents/wtc/camagru/log/errors.log");
 }
 
