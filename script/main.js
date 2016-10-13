@@ -56,8 +56,6 @@ function logout() {
 	});
 }
 
-
-
 function showLogin() {
     login_form.style.display = "flex";
     logout_text.style.display = "none";

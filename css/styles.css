@@ -34,8 +34,33 @@ footer {
     box-shadow: none;
 }
 
-.register > .input-box {
+.register {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: flex-start;
+	padding: 50px;
+	background-color: #7C4DFF;
+	border-radius: 10px;
+}
+
+.register-input {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 14px;
+}
+
+.register-input > .input-box {
 	font-size: 1rem;
+	min-width: 20rem;
+}
+
+.register-input > .input-message {
+	margin-right: 6px;
+	text-align: right;
+	min-height: 0.9rem;
+	font-size: 0.8rem;
+	color: tomato;
 }
 
 .input-box:focus {
@@ -62,7 +87,8 @@ footer {
 
 .content {
     height: 100%;
-    margin: 16px;
+    margin: 0;
+	display: flex;
 }
 
 .row {
@@ -93,4 +119,9 @@ footer {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
+}
+
+.h2 {
+	color: white;
+	margin-top: 0;
 }

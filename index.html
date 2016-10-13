@@ -20,7 +20,7 @@
                             <input type="submit" name="name" value="Log In" onclick="login()" />
                         </div>
                         <div style="display: flex; flex-direction: row-reverse; justify-content: space-between">
-							<a href="#" onclick="create_account" style="color: white">Create account</a>
+							<a href="#" onclick="create_user()" style="color: white">Create account</a>
 							<b id="login_error" class="hidden" style="color: tomato; padding: 0 3px">INCORRECT USERNAME OR PASSWORD</b>
 						</div>
                     </div>
@@ -35,7 +35,7 @@
             </div>
         </header>
 
-        <section class="content"></section>
+        <section id="main" class="content"></section>
 
         <footer>
             Camagru - &copy adippena 2016
@@ -43,6 +43,7 @@
 
         <script src="script/main.js" charset="utf-8"></script>
         <script src="script/animations.js" charset="utf-8"></script>
+		<script src="script/create_user.js" charset="utf-8"></script>
         <script type="text/javascript">
             whoami();
         </script>

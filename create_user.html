@@ -1,6 +1,36 @@
 <!DOCTYPE html>
-<div class="register">
-	<input id="reg-username" class="input-box" type="text" placeholder="Username" />
-	<input id="reg-password" class="input-box" type="text" placeholder="Password" />
-	<input type="submit" name="name" value="Log In" onclick="login()" />
+<div style="width: 100%; display: flex; align-items: center; justify-content: center">
+    <div class="register">
+        <h2 class="h2">Register account</h2>
+		<div class="register-input">
+			<input id="reg-firstname" class="input-box" type="text" placeholder="First Name" onblur="validateFirstname()"/>
+			<span id="reg-firstname-message" class="input-message"></span>
+		</div>
+		<div class="register-input">
+			<input id="reg-lastname" class="input-box" type="text" placeholder="Last Name" onblur="validateLastname()"/>
+			<span id="reg-lastname-message" class="input-message"></span>
+		</div>
+		<div class="register-input">
+			<input id="reg-email" class="input-box" type="text" placeholder="E-mail address" onblur="validateEmail()"/>
+			<span id="reg-email-message" class="input-message"></span>
+		</div>
+		<div class="register-input">
+			<input id="reg-email2" class="input-box" type="text" placeholder="Confirm E-mail address" onblur="validateEmail2()"/>
+			<span id="reg-email2-message" class="input-message"></span>
+		</div>
+		<div class="register-input">
+			<input id="reg-username" class="input-box" type="text" placeholder="Username" onblur="validateUsername()"/>
+			<span id="reg-username-message" class="input-message"></span>
+		</div>
+		<div class="register-input">
+			<input id="reg-password" class="input-box" type="text" placeholder="Password" onblur="validatePassword"/>
+			<span id="reg-password-message" class="input-message"></span>
+		</div>
+		<div class="register-input">
+			<input id="reg-password2" class="input-box" type="text" placeholder="Confirm Password" onblur="validatePassword2"/>
+			<span id="reg-password2-message" class="input-message"></span>
+		</div>
+
+        <input type="submit" name="name" value="Log In" onclick="register()"/>
+    </div>
 </div>
