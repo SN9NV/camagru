@@ -48,9 +48,15 @@ function whoami() {
 function logout() {
     ajaxPost("php/logout.php", null, function(response) {
 		user = JSON.parse(response);
-		showLogin();
+		if (!user) {
+			showLogin();
+		} else {
+			console.log("Oh no");
+		}
 	});
 }
+
+
 
 function showLogin() {
     login_form.style.display = "flex";

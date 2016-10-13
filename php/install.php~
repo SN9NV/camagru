@@ -13,7 +13,7 @@ try {
 		lastname VARCHAR(32) NOT NULL,
 		username VARCHAR(32) NOT NULL,
 		password VARCHAR(128) NOT NULL,
-		email VARCHAR(64) NOT NULL)");
+		admin TINYINT(1) UNSIGNED DEFAULT 0)");
 	$conn->exec("USE camagru; CREATE TABLE IF NOT EXISTS images (
 		id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 		userid INT(6) UNSIGNED NOT NULL,
