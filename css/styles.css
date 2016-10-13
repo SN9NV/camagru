@@ -3,66 +3,90 @@ a, a:link, a:visited, a:hover {
 }
 
 html, body {
-	height: 100%;
-	margin: 0;
-	display: flex;
-	flex-direction: column;
+    font-family: 'Roboto', sans-serif;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 header {
-	background-color: teal;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	min-height: 56px;
+    background-color: teal;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 56px;
 }
 
 footer {
-	padding: 0.5rem;
-	text-align: center;
-	background-color: teal;
+    padding: 0.5rem;
+    text-align: center;
+    background-color: teal;
+}
+
+.input-box {
+    color: white;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #9e9e9e;
+    margin: 3px;
+    padding: 0 0 3px 6px;
+    box-shadow: none;
+}
+
+.input-box:focus {
+	outline: none;
+	box-shadow: none;
 }
 
 .input-error {
-	border-color: tomato;
-	background-color: tomato;
+    border-bottom: 2px solid tomato;
+}
+
+.hidden {
+    display: none;
+}
+
+.logout-text {
+    color: white;
+    text-align: center;
 }
 
 .padding {
-	margin: 8px;
+    margin: 8px;
 }
 
 .content {
-	height: 100%;
-	margin: 16px;
+    height: 100%;
+    margin: 16px;
 }
 
 .row {
-	flex-direction: row;
+    flex-direction: row;
 }
 
 .column {
-	flex-direction: column;
+    flex-direction: column;
 }
 
 .wrap {
-	flex-wrap: wrap;
+    flex-wrap: wrap;
 }
 
 .logo {
-	height: 40px;
-	vertical-align: middle;
+    height: 40px;
+    vertical-align: middle;
 }
 
 .login_form {
-	position: relative;
-	right: 0;
-	display: flex;
-	flex-flow: row wrap;
+    position: relative;
+    right: 0;
+    display: flex;
+    flex-flow: row wrap;
 }
 
 .gallery {
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }

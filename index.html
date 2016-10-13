@@ -1,28 +1,50 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons" />
-		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-		<link type="text/css" rel="stylesheet" href="css/styles.css" />
-		<title>Camagru</title>
-	</head>
-	<body>
-		<header class="nav row wrap">
-			<a href="#" class="padding"><img class="logo" src="img/logo.png" /></a>
-			<div id="login" class="padding">
-			</div>
-		</header>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons"/>
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="css/styles.css"/>
 
-		<section id="main" class="content">
-		</section>
+        <title>Camagru</title>
+    </head>
+    <body>
+        <header class="nav row wrap">
+            <a href="#" class="padding"><img class="logo" src="img/logo.png"/></a>
+            <div class="padding">
+                <div id="login_form" class="hidden">
+                    <div style="display: flex; flex-direction: column">
+                        <div>
+                            <input id="username" class="input-box" type="text" placeholder="Username" tabindex="1"/>
+                            <input id="password" class="input-box" type="text" placeholder="Password" tabindex="2"/>
+                            <input type="submit" name="name" value="Log In" onclick="login()" tabindex="3">
+                        </div>
+                        <div style="display: flex; flex-direction: row-reverse; justify-content: space-between">
+							<a href="#" onclick="create_account" style="color: white">Create account</a>
+							<b id="login_error" class="hidden" style="color: tomato; padding: 0 3px">INCORRECT USERNAME OR PASSWORD</b>
+						</div>
+                    </div>
 
-		<footer>
-			Camagru - &copy adippena 2016
-		</footer>
-		<script src="script/whoami.js" charset="utf-8"></script>
-		<script type="text/javascript">
-			whoami();
-		</script>
-	</body>
+                </div>
+                <div id="logout_text" class="hidden logout-text" style="diaplsy: flex; align-items: center">
+                    <b id="login_name" style="vertical-align: middle; margin: 3px"></b>
+                    <a href="#" onclick="logout()">
+                        <i class="material-icons" style="vertical-align: middle; font-size: 2rem">power_settings_new</i>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <section class="content"></section>
+
+        <footer>
+            Camagru - &copy adippena 2016
+        </footer>
+
+        <script src="script/main.js" charset="utf-8"></script>
+        <script src="script/animations.js" charset="utf-8"></script>
+        <script type="text/javascript">
+            whoami();
+        </script>
+    </body>
 </html>

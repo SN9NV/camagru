@@ -6,6 +6,6 @@ if ($_SESSION['logged_on_user']) {
 	echo json_encode($_SESSION['logged_on_user']);
 }
 else {
-	echo json_encode(false);
+	echo json_encode(null);
 }
 ?>

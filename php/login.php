@@ -10,6 +10,6 @@ if ($user) {
 }
 else {
 	$_SESSION['logged_on_user'] = null;
-	echo json_encode(false);
+	echo json_encode(null);
 }
 ?>
