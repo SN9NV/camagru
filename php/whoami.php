@@ -1,6 +1,7 @@
 <?php
 session_start();
-header('Content-Type: text/plain');
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json; charset=UTF-8");
 if ($_SESSION['logged_on_user']) {
 	echo json_encode($_SESSION['logged_on_user']);
 }

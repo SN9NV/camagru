@@ -1,14 +1,15 @@
 <?php
 session_start();
 include "auth.php";
-header('Content-Type: application/json');
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json; charset=UTF-8");
 $user = auth($_POST['login'], $_POST['passwd']);
 if ($user) {
 	$_SESSION['logged_on_user'] = $user;
-	echo json_encode($user, JSON_NUMERIC_CHECK);
+	echo json_encode($user);
 }
 else {
 	$_SESSION['logged_on_user'] = null;
-	echo "No no no no no";
+	echo json_encode(false);
 }
 ?>
