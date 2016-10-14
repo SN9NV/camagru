@@ -1,15 +1,5 @@
 var newUser = [];
 
-function create_user() {
-	ajaxPost("create_user.html", null, function(response) {
-		if (response) {
-			document.getElementById('main').innerHTML = response;
-		} else {
-			console.log("Oh no");
-		}
-	});
-}
-
 function validateFirstname() {
 	var input = document.getElementById('reg-firstname');
 	var error = document.getElementById('reg-firstname-message');

@@ -5,6 +5,7 @@ var logout_text = document.getElementById("logout_text");
 var login_name = document.getElementById("login_name");
 var username = document.getElementById('username');
 var password = document.getElementById('password');
+changePage(window.location.hash);
 
 function addClass(el, className) {
     if (!el.classList.contains(className)) {
@@ -78,3 +79,37 @@ function ajaxPost(url, send, callback) {
     http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     http.send(send);
 }
+
+function loadPartial(page) {
+	ajaxPost(page, null, function(response) {
+		if (response) {
+			document.getElementById('main').innerHTML = response;
+		} else {
+			console.log("Oh no. Could not load page " + page);
+			alert("Oh no. Could not load page " + page);
+		}
+	});
+}
+
+function changePage(url) {
+	switch (url) {
+		case "#" : {
+			loadPartial("index_page.html");
+			break;
+		}
+		case "#/register" : {
+			loadPartial("create_user.html");
+			break;
+		}
+		case "#home" : {
+			break;
+		}
+		default : {
+			loadPartial("404.html");
+		}
+	}
+}
+
+window.onhashchange = function() {
+	changePage(window.location.hash);
+};
