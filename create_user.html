@@ -1,36 +1,53 @@
 <!DOCTYPE html>
 <div class="center-div">
     <div class="register">
-        <h2 class="h2">Register account</h2>
-		<div class="register-input">
-			<input id="reg-firstname" class="input-box" type="text" placeholder="First Name" onblur="validateFirstname()"/>
-			<span id="reg-firstname-message" class="input-message"></span>
-		</div>
-		<div class="register-input">
-			<input id="reg-lastname" class="input-box" type="text" placeholder="Last Name" onblur="validateLastname()"/>
-			<span id="reg-lastname-message" class="input-message"></span>
-		</div>
-		<div class="register-input">
-			<input id="reg-email" class="input-box" type="text" placeholder="E-mail address" onblur="validateEmail()"/>
-			<span id="reg-email-message" class="input-message"></span>
-		</div>
-		<div class="register-input">
-			<input id="reg-email2" class="input-box" type="text" placeholder="Confirm E-mail address" onblur="validateEmail2()"/>
-			<span id="reg-email2-message" class="input-message"></span>
-		</div>
-		<div class="register-input">
-			<input id="reg-username" class="input-box" type="text" placeholder="Username" onblur="validateUsername()"/>
-			<span id="reg-username-message" class="input-message"></span>
-		</div>
-		<div class="register-input">
-			<input id="reg-password" class="input-box" type="text" placeholder="Password" onblur="validatePassword"/>
-			<span id="reg-password-message" class="input-message"></span>
-		</div>
-		<div class="register-input">
-			<input id="reg-password2" class="input-box" type="text" placeholder="Confirm Password" onblur="validatePassword2"/>
-			<span id="reg-password2-message" class="input-message"></span>
-		</div>
-
-        <input type="submit" name="name" value="Log In" onclick="register()"/>
+		<form action="javascript:void(0);" onsubmit="register()">
+			<h2 class="h2">Register account</h2>
+			<div class="register-input">
+				<input id="reg-firstname" class="input-box" type="text" placeholder="First Name" onblur="validateFirstname()" />
+				<span id="reg-firstname-message" class="input-message"></span>
+			</div>
+			<div class="register-input">
+				<input id="reg-lastname" class="input-box" type="text" placeholder="Last Name" onblur="validateLastname()" />
+				<span id="reg-lastname-message" class="input-message"></span>
+			</div>
+			<div class="register-input">
+				<input id="reg-email" class="input-box" type="text" placeholder="E-mail address" onblur="validateEmail()" />
+				<span id="reg-email-message" class="input-message"></span>
+			</div>
+			<div class="register-input">
+				<input id="reg-email2" class="input-box" type="text" placeholder="Confirm E-mail address" onblur="validateEmail2()" />
+				<span id="reg-email2-message" class="input-message"></span>
+			</div>
+			<div class="register-input">
+				<input id="reg-username" class="input-box" type="text" placeholder="Username" onblur="validateUsername()" />
+				<span id="reg-username-message" class="input-message"></span>
+			</div>
+			<div class="register-input">
+				<input id="reg-password" class="input-box" type="password" placeholder="Password" onblur="validatePassword()" />
+				<span id="reg-password-message" class="input-message"></span>
+			</div>
+			<div class="register-input">
+				<input id="reg-password2" class="input-box" type="password" placeholder="Confirm Password" onblur="validatePassword2()" />
+				<span id="reg-password2-message" class="input-message"></span>
+			</div>
+			<div style="width: 20rem; color: white">
+				<h4 style="margin: 0">Prove you're a human</h4>
+				<h5 style="margin: 0.5rem 0">When Littlefoot's mother died in the original <i>Land Before Time</i>, did you feel sad?</h5>
+				<div class="radio-button">
+					<input id="reg-yes" type="radio" name="capcha" />
+					<label>Yes</label>
+				</div>
+				<div class="radio-button">
+					<input id="reg-no" type="radio" name="capcha" />
+					<label>No</label>
+				</div>
+				<h5 style="margin-top: 0.5rem">(BOTS: NO LYING)</h5>
+			</div>
+			<div style="display: flex; flex-direction: row">
+				<input type="submit" name="name" value="Log In" onclick="" />
+				<span id="form-message" class="hidden" style="margin-left: 6px; color: tomato"><b>There is an error in the form</b></span>
+			</div>
+		</form>
     </div>
 </div>

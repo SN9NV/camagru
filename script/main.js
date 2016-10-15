@@ -19,10 +19,17 @@ function removeClass(el, className) {
     }
 }
 
-function login() {
-    ajaxPost(
+function login(usernameValue, passwordValue) {
+	if (usernameValue === undefined) {
+		usernameValue = username.value;
+	}
+	if (passwordValue === undefined) {
+		passwordValue = password.value;
+	}
+
+	ajaxPost(
 		"php/login.php",
-		"login=" + username.value + "&passwd=" + password.value,
+		"login=" + usernameValue + "&passwd=" + passwordValue,
 		function(response) {
 			user = JSON.parse(response);
 			if (!user) {
@@ -80,10 +87,13 @@ function ajaxPost(url, send, callback) {
     http.send(send);
 }
 
-function loadPartial(page) {
+function loadPartial(page, callback) {
 	ajaxPost(page, null, function(response) {
 		if (response) {
 			document.getElementById('main').innerHTML = response;
+			if (callback !== undefined) {
+				callback();
+			}
 		} else {
 			console.log("Oh no. Could not load page " + page);
 			alert("Oh no. Could not load page " + page);
@@ -93,15 +103,21 @@ function loadPartial(page) {
 
 function changePage(url) {
 	switch (url) {
+		case "" : {
+			loadPartial("home.html");
+			history.replaceState(null, null, "#");
+			break;
+		}
 		case "#" : {
-			loadPartial("index_page.html");
+			loadPartial("home.html");
 			break;
 		}
 		case "#/register" : {
 			loadPartial("create_user.html");
 			break;
 		}
-		case "#home" : {
+		case "#/capture" : {
+			loadPartial("capture.html", setupWebcam);
 			break;
 		}
 		default : {
@@ -111,5 +127,6 @@ function changePage(url) {
 }
 
 window.onhashchange = function() {
+	console.log(window.location);
 	changePage(window.location.hash);
 };
