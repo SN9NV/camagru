@@ -102,6 +102,9 @@ function loadPartial(page, callback) {
 }
 
 function changePage(url) {
+	if (window.stream && window.stream.getTracks().length === 1) {
+		stream.getTracks()[0].stop();
+	}
 	switch (url) {
 		case "" : {
 			loadPartial("home.html");

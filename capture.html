@@ -1,7 +1,36 @@
 <!DOCTYPE html>
-<div style="display: flex; height: 100%; width: 100%; position: relative">
-    <video id="video-webcam" class="webcamVideo" autoplay></video>
-    <button onclick="snapshot()">Take Picture</button>
-	<button onclick="closeWebcam()">Close Webcam</button>
-    <canvas id="picture-canvas" style="border: 2px solid #000"></canvas>
+<div style="display: flex; flex-direction: row; flex-wrap">
+	<div id="selections" style="display: flex; flex-direction: column; flex-wrap">
+		<button class="overlay-button" onclick="selectOverlay('frame0')">
+			<img src="img/ic_frame0.png" class="overlay-icon" />
+		</button>
+		<button class="overlay-button" onclick="selectOverlay('crown')">
+			<img src="img/ic_crown.png" class="overlay-icon" />
+		</button>
+		<button class="overlay-button" onclick="selectOverlay('pahe')">
+			<img src="img/ic_pahe.png" class="overlay-icon" />
+		</button>
+		<button class="overlay-button" onclick="selectOverlay('paheThought')">
+			<img src="img/ic_paheThought.png" class="overlay-icon" />
+		</button>
+		<button class="overlay-button" onclick="selectOverlay('dickbuttNigel')">
+			<img src="img/ic_dickbuttNigel.png" class="overlay-icon" />
+		</button>
+	</div>
+	<div style="display: flex; flex-direction: column; flex-wrap">
+		<div style="display: flex; position: relative">
+			<video id="video-webcam" class="webcamVideo" autoplay></video>
+			<img id="video-overlay" src="img/frame0.png" class="overlay" />
+		</div>
+		<div style="display: flex; justify-content: space-around">
+			<button onclick="snapshot()">Take Picture</button>
+			<button onclick="saveImage()">Save</button>
+		</div>
+		Title of your creation: <input id="image-title" type="text" />
+	</div>
+	<div style="display: flex; position: relative; width: 480px; height: 360px">
+		<canvas id="picture-canvas" style="width: 100%; height: 100%"></canvas>
+		<img id="canvas-overlay" src="img/frame0.png" class="overlay" />
+	</div>
+
 </div>

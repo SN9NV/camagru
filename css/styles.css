@@ -162,3 +162,27 @@ footer {
 video {
 	transform: scaleX(-1);
 }
+
+.overlay {
+	background-color: transparent;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+}
+
+.overlay-button {
+	width: 68px;
+	height: 68px;
+	padding: 0;
+	background-color: transparent;
+	border: 0;
+}
+
+.overlay-button:focus {
+	outline: none;
+	box-shadow: none;
+}
+
+.overlay-icon {
+	margin: 0;
+}
