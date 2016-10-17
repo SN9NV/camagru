@@ -16,16 +16,15 @@
                         <div>
 							<form action="javascript:void(0);" onsubmit="login()">
                             	<input id="username" class="input-box" type="text" placeholder="Username" />
-                            	<input id="password" class="input-box" type="text" placeholder="Password" />
+                            	<input id="password" class="input-box" type="password" placeholder="Password" />
                             	<input type="submit" name="name" value="Log In" />
 							</form>
                         </div>
                         <div style="display: flex; flex-direction: row-reverse; justify-content: space-between">
 							<a href="#/register" style="color: white">Create account</a>
-							<b id="login_error" class="hidden" style="color: tomato; padding: 0 3px">INCORRECT USERNAME OR PASSWORD</b>
+							<b id="login_error" class="hidden" style="color: tomato; padding: 0 3px; font-size: 0.8rem">INCORRECT USERNAME OR PASSWORD</b>
 						</div>
                     </div>
-
                 </div>
                 <div id="logout_text" class="hidden logout-text" style="diaplsy: flex; align-items: center">
                     <b id="login_name" style="vertical-align: middle; margin: 3px"></b>
@@ -36,18 +35,25 @@
             </div>
         </header>
 
+		<div id="add-button" class="floating-button">
+			<a href="#/capture">
+				<i class="material-icons">add</i>
+			</a>
+		</div>
+
         <section id="main" class="content"></section>
 
         <footer>
             Camagru - &copy adippena 2016
         </footer>
 
+		<script type="text/javascript">
+			"use strict";
+		</script>
         <script src="script/animations.js" charset="utf-8"></script>
 		<script src="script/create_user.js" charset="utf-8"></script>
 		<script src="script/capture.js" charset="utf-8"></script>
+		<script src="script/get_images.js" charset="utf-8"></script>
 		<script src="script/main.js" charset="utf-8"></script>
-        <script type="text/javascript">
-            whoami();
-        </script>
     </body>
 </html>
