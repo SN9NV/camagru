@@ -112,7 +112,10 @@ function changePage(url) {
         stream.getTracks()[0].stop();
     }
     if (url === "" || url === "#/" || url === "#") {
-        loadPartial("home.html", ShowHideButton);
+        loadPartial("home.html", function() {
+			ShowHideButton();
+			getImages();
+		});
         history.replaceState(null, null, "#");
         return;
     }

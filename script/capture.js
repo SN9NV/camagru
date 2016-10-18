@@ -19,8 +19,6 @@ function setupWebcam() {
     canvas.width = 480;
     canvas.height = 360;
 	draw = canvas.getContext('2d');
-	draw.translate(canvas.width, 0);
-	draw.scale(-1, 1);
 
     navigator.mediaDevices.getUserMedia(constraints)
         .then(handleSuccess)
@@ -28,7 +26,12 @@ function setupWebcam() {
 }
 
 function snapshot() {
+	draw.setTransform(1, 0, 0, 1, 0, 0);
+	draw.clearRect(0, 0, canvas.width, canvas.height);
+	draw.translate(canvas.width, 0);
+	draw.scale(-1, 1);
 	draw.drawImage(video, 0, 0, canvas.width, canvas.height);
+	document.getElementById('save-image').disabled = false;
 }
 
 function handleSuccess(stream) {
@@ -47,7 +50,6 @@ function saveImage() {
 	send += "&overlay=" + selectedOverlay;
     ajaxPost("php/save_image.php", send, function(response) {
 		var result = JSON.parse(response);
-		console.log(result);
 		if (!result) {
 			login();
 		}
@@ -67,30 +69,21 @@ function resizeUpload(e) {
 	reader.onload = function(event) {
 		var img = new Image();
 		img.onload = function() {
-			var maxWidth = 480;
-			var maxHeight = 360;
-			var imgWidth = img.width;
-			var imgHeight = img.height;
-			if (imgWidth > imgHeight) {
-				if (imgWidth > maxWidth) {
-					imgHeight *= maxWidth / imgWidth;
-					imgWidth = maxWidth;
-				}
-			} else {
-				if (imgHeight > maxHeight) {
-					imgWidth *= maxHeight / imgHeight;
-					imgHeight = maxHeight;
-				}
-			}
+			var ratio = Math.min(canvas.width / img.width, canvas.height / img.height);
+			var centerX = (canvas.width - img.width * ratio) / 2;
+			var centerY = (canvas.height - img.height * ratio) / 2;
 			draw.setTransform(1, 0, 0, 1, 0, 0);
 			draw.clearRect(0, 0, canvas.width, canvas.height);
-			draw.drawImage(img, 0, 0, imgWidth, imgHeight);
+			draw.drawImage(img, 0, 0, img.width, img.height, centerX, centerY, img.width * ratio, img.height * ratio);
+			document.getElementById('save-image').disabled = false;
 		};
 		img.src = event.target.result;
 	};
-	if (e.target.type === "image*") {
+	if (e.target.files[0].type.match("image.*")) {
 		reader.readAsDataURL(e.target.files[0]);
+		document.getElementById('capture-error').innerHTML = "";
 	} else {
 		console.log("Selected file is not an image");
+		document.getElementById('capture-error').innerHTML = "Selected file is not an image";
 	}
 }

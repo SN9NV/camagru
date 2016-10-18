@@ -29,9 +29,10 @@
 			<button onclick="snapshot()">Take Picture</button>
 			OR
 			<input type="file" id="upload-image" name="Upload image" />
-			<button onclick="saveImage()">Save</button>
+			<button id="save-image" onclick="saveImage()" disabled>Save</button>
 		</div>
 		Title of your creation: <input id="image-title" type="text" />
+		<span id="capture-error" style="color: tomato"></span>
 	</div>
 	<div style="display: flex; position: relative; width: 480px; height: 360px">
 		<canvas id="picture-canvas" style="width: 100%; height: 100%"></canvas>

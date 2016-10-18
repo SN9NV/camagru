@@ -1,0 +1,4 @@
+PDOException: SQLSTATE[HY000]: General error: 1364 Field 'date' doesn't have a default value in /home/angus/Documents/wtc/camagru/php/save_image.php:35
+Stack trace:
+#0 /home/angus/Documents/wtc/camagru/php/save_image.php(35): PDOStatement->execute()
+#1 {main}

@@ -1,11 +1,11 @@
 var validUsername = false;
 
 function validateFirstname() {
-    return validateInput('reg-firstname', null, "Only upper and lowercase letters allowed", /[^A-Za-z]/, false);
+    return validateInput('reg-firstname', null, "Only upper and lowercase letters allowed", /[^A-Za-z ]/, false);
 }
 
 function validateLastname() {
-    return validateInput('reg-lastname', null, "Only upper and lowercase letters allowed", /[^A-Za-z]/, false);
+    return validateInput('reg-lastname', null, "Only upper and lowercase letters allowed", /[^A-Za-z\ ]/g, false);
 }
 
 function validateEmail() {
