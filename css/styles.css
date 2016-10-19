@@ -4,6 +4,7 @@ a, a:link, a:visited, a:hover {
 
 html {
 	height: 100%;
+	width: 100%;
 }
 
 body {
@@ -12,6 +13,7 @@ body {
     margin: 0;
 	display: flex;
 	flex-direction: column;
+	width: 100%;
 }
 
 header {
@@ -203,6 +205,8 @@ video {
 	display: flex;
 	flex-direction: column;
 	margin: 6px;
+	max-width: 480px;
+	width: 100%;
 }
 
 .gallery > article > header {
@@ -255,7 +259,7 @@ video {
 
 .actions {
 	display: flex;
-	flex-direction: row;
+	flex-flow: row wrap;
 	justify-content: space-around;
 }
 

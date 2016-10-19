@@ -147,11 +147,8 @@ function getImages() {
                 var comment = document.createElement('div');
                 comment.classList = "comment";
                 if (item.title) {
-                    var b = document.createElement('b');
-                    b.innerText = item.username;
-                    comment.appendChild(b);
                     var span = document.createElement('span');
-                    span.innerText = "\u00A0" + item.title;
+                    span.innerHTML = "<b>" + item.username + "</b> " + item.title;
                     comment.appendChild(span);
                 }
 				var textbox = document.createElement('input');
