@@ -22,6 +22,15 @@ try {
 		userid INT(6) UNSIGNED NOT NULL,
 		title VARCHAR(128),
 		date datetime DEFAULT CURRENT_TIMESTAMP NOT NULL);");
+	$conn->exec("USE camagru; CREATE TABLE IF NOT EXISTS likes (
+		id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+		imgid TEXT NOT NULL,
+		userig INT(6) NOT NULL;");
+	$conn->exec("USE camagru; CREATE TABLE IF NOT EXISTS comment (
+		id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+		imgid VARCHAR(13) NOT NULL,
+		userig INT(6) NOT NULL,
+		comment VARCHAR(128) NOT NULL;");
 }
 catch (PDOException $e) {
 	error_log($e, 3, "/home/angus/Documents/wtc/camagru/log/errors.log");
