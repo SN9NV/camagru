@@ -39,7 +39,7 @@ if ($_SESSION['logged_on_user']) {
 	        echo json_encode(false);
 	    }
 	} catch (PDOException $e) {
-	    error_log($e, 3, '/home/angus/Documents/wtc/camagru/log/errors.log');
+	    error_log(date() + $e, 3, '/home/angus/Documents/wtc/camagru/log/errors.log');
 	    echo json_encode('Database error');
 	}
 
