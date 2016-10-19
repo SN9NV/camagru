@@ -13,7 +13,6 @@ body {
     margin: 0;
 	display: flex;
 	flex-direction: column;
-	width: 100%;
 }
 
 header {
@@ -34,6 +33,23 @@ section {
 	display: flex;
 	flex: 2;
 	overflow: auto;
+}
+
+.login-form {
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: space-between;
+}
+
+.login-form > .create-account {
+	color: white;
+	font-size: 0.8rem;
+}
+
+.login-form > .login-error {
+	color: tomato;
+	padding: 0 3px;
+	font-size: 0.8rem;
 }
 
 .input-box {
@@ -199,14 +215,15 @@ video {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
+	position: relative;
 }
 
 .gallery > article {
 	display: flex;
 	flex-direction: column;
 	margin: 6px;
-	max-width: 480px;
 	width: 100%;
+	max-width: 480px;
 }
 
 .gallery > article > header {
@@ -242,6 +259,10 @@ video {
 	display: flex;
 	margin-right: 9px;
 	color: #AAA;
+}
+
+.gallery img {
+	width: inherit;;
 }
 
 .gallery > article > footer {

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-		<meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=1" charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=0.9" charset="utf-8" />
         <link rel="stylesheet" href="fonts/fonts.css">
         <link type="text/css" rel="stylesheet" href="css/styles.css"/>
         <title>Camagru</title>
@@ -19,9 +19,9 @@
                             	<input type="submit" name="name" value="Log In" />
 							</form>
                         </div>
-                        <div style="display: flex; flex-direction: row-reverse; justify-content: space-between">
-							<a href="#/register" style="color: white">Create account</a>
-							<b id="login_error" class="hidden" style="color: tomato; padding: 0 3px; font-size: 0.8rem">INCORRECT USERNAME OR PASSWORD</b>
+                        <div class="login-form">
+							<a href="#/register" class="create-account">Create account</a>
+							<b id="login_error" class="login-error hidden">INCORRECT USERNAME OR PASSWORD</b>
 						</div>
                     </div>
                 </div>
@@ -33,12 +33,6 @@
                 </div>
             </div>
         </header>
-
-		<div id="add-button" class="floating-button">
-			<a href="#/capture">
-				<i class="material-icons">add</i>
-			</a>
-		</div>
 
         <section id="main" class="content"></section>
 
