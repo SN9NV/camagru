@@ -34,7 +34,8 @@ try {
 		id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 		imgid VARCHAR(13) NOT NULL,
 		userid INT(6) NOT NULL,
-		comment VARCHAR(128) NOT NULL);");
+		comment VARCHAR(128) NOT NULL,
+		date datetime DEFAULT CURRENT_TIMESTAMP NOT NULL);");
 }
 catch (PDOException $e) {
 	error_log($e, 3, "/home/angus/Documents/wtc/camagru/log/errors.log");

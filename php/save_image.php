@@ -31,8 +31,8 @@ if ($_SESSION['logged_on_user']) {
 	    if ($success) {
 	        $conn = new PDO("mysql:host=$server;dbname=$dbname", 'root', 'sparewheel');
 	        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	        $sql = $conn->prepare("INSERT INTO `images` (`id`, `userid`, `title`) VALUES ('$uniqid', '$uid', '$title');");
-	        $sql->execute();
+	        $sql = $conn->prepare("INSERT INTO `images` (`id`, `userid`, `title`) VALUES (?, ?, ?);");
+	        $sql->execute([$uniqid, $uid, $title]);
 
 	        echo json_encode(true);
 	    } else {

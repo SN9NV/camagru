@@ -14,13 +14,13 @@ try {
     $conn = new PDO("mysql:host=$server;dbname=$dbname", 'root', 'sparewheel');
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $sql = $conn->prepare(
-		"SELECT images.id AS 'id', users.username AS 'username', users.profilepic AS userpic, images.title AS 'title', unix_timestamp(images.date) AS 'date', (CASE WHEN images.userid=$user THEN 1 ELSE 0 END) AS 'creator'
+		"SELECT images.id AS 'id', users.username AS 'username', users.profilepic AS userpic, images.title AS 'title', unix_timestamp(images.date) AS 'date', (CASE WHEN images.userid=? THEN 1 ELSE 0 END) AS 'creator'
 		FROM images
 			INNER JOIN users
 				ON images.userid=users.id
 		ORDER BY `date` DESC
 		LIMIT 50;");
-    $sql->execute();
+    $sql->execute([$user]);
     $images = $sql->fetchAll(PDO::FETCH_CLASS);
 
     echo json_encode($images, JSON_NUMERIC_CHECK);

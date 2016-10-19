@@ -3,21 +3,19 @@ session_start();
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
-if ($_POST['first'] && $_POST['last'] && $_POST['user'] && $_POST['passwd']  && $_POST['email']) {
+if ($_POST['imgid']) {
 	try {
 		$server = "localhost";
 		$dbname = "camagru";
 
-		$first = $_POST['first'];
-		$last = $_POST['last'];
-		$user = $_POST['user'];
-		$email = $_POST['email'];
-		$passwd = hash('whirlpool', $_POST['passwd']);
+		$imgid = $_POST['imgid'];
+		$comment = $_POST['comment'];
+		$userid = $_SESSION['logged_on_user']['id'];
 
 		$conn = new PDO("mysql:host=$server;dbname=$dbname", "root", "sparewheel");
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = $conn->prepare("INSERT INTO `users` (`firstname`, `lastname`, `username`, `password`, `email`) VALUES (?, ?, ?, ?, ?);");
-		$sql->execute([$first, $last, $user, $passwd, $email]);
+		$sql = $conn->prepare("INSERT INTO comments (userid, imgid, comment) VALUES (?, ?, ?);");
+		$sql->execute([$userid, $imgid, $comment]);
 
 		echo json_encode(true);
 	}

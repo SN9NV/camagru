@@ -6,8 +6,8 @@ function auth ($login, $passwd) {
 		$dbname = "camagru";
 		$conn = new PDO("mysql:host=$server;dbname=$dbname", "root", "sparewheel");
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = $conn->prepare("SELECT `id`, `firstname` FROM `users` WHERE username='$login' AND password='$passwd';");
-		$sql->execute();
+		$sql = $conn->prepare("SELECT `id`, `firstname` FROM `users` WHERE username=? AND password=?;");
+		$sql->execute([$login, $passwd]);
 
 		if ($sql->rowCount() == 1) {
 			$fetch = $sql->fetch(PDO::FETCH_ASSOC);

@@ -10,8 +10,8 @@ try {
 
     $conn = new PDO("mysql:host=$server;dbname=$dbname", 'root', 'sparewheel');
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql = $conn->prepare("SELECT `id` FROM `users` WHERE username='$user';");
-    $sql->execute();
+    $sql = $conn->prepare("SELECT `id` FROM `users` WHERE username=?;");
+    $sql->execute([$user]);
 	echo json_encode(($sql->rowCount() > 0));
 } catch (PDOException $e) {
         error_log($e, 3, '/home/angus/Documents/wtc/camagru/log/errors.log');
