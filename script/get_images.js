@@ -47,6 +47,7 @@ function timeSince(date) {
 function getImages() {
     ajaxPost("php/get_images.php", null, function(response) {
 		var result = JSON.parse(response);
+		console.log(result);
 		if (result !== "Database error") {
 			var gallery = document.getElementById('gallery');
 			while (gallery.hasChildNodes()) {
@@ -116,6 +117,7 @@ function getImages() {
 				var favouriteIcon = document.createElement('i');
 				favouriteIcon.classList = "material-icons";
 				favouriteIcon.innerText = "favorite";
+				favouriteIcon.id = item.id + "favourite";
 				favouriteButton.appendChild(favouriteIcon);
 				var commentButton = document.createElement('button');
 				commentButton.onclick = function() { galleryComment(item.id); };
@@ -165,6 +167,17 @@ function getImages() {
 
 function galleryFavourite(id) {
 	console.log("Favourite " + id);
+	if (user) {
+		ajaxPost("php/like.php", "imgid=" + id, function(response) {
+			var result = JSON.parse(response);
+			console.log(result);
+			if (result) {
+				document.getElementById(id + "favourite").style.color = "red";
+			}
+		});
+	} else {
+		login();
+	}
 }
 
 function galleryComment(id) {

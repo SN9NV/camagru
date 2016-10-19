@@ -16,8 +16,8 @@ try {
     $sql = $conn->prepare(
 		"SELECT images.id AS 'id', users.username AS 'username', users.profilepic AS userpic, images.title AS 'title', unix_timestamp(images.date) AS 'date', (CASE WHEN images.userid=$user THEN 1 ELSE 0 END) AS 'creator'
 		FROM images
-		INNER JOIN users
-		ON images.userid=users.id
+			INNER JOIN users
+				ON images.userid=users.id
 		ORDER BY `date` DESC
 		LIMIT 50;");
     $sql->execute();
