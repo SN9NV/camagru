@@ -192,24 +192,6 @@ video {
 	width: 100%;
 }
 
-.overlay-button {
-	width: 68px;
-	height: 68px;
-	padding: 0;
-	background-color: transparent;
-	border: 0;
-}
-
-.overlay-button:focus {
-	outline: none;
-	box-shadow: none;
-}
-
-.overlay-icon {
-	margin: 0;
-}
-
-
 .gallery {
 	display: flex;
     flex-direction: row;
@@ -245,8 +227,8 @@ video {
 }
 
 .gallery > article > header > div > img {
-	width: 60px;
-	height: 45px;
+	min-width: 60px;
+	min-height: 45px;
 	display: flex;
 }
 
@@ -262,7 +244,7 @@ video {
 }
 
 .gallery img {
-	width: inherit;;
+	width: inherit;
 }
 
 .gallery > article > footer {
@@ -294,4 +276,61 @@ video {
 .actions > button:focus {
 	outline: none;
 	box-shadow: none;
+}
+
+.selections {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.selections button {
+	width: 68px;
+	height: 68px;
+	padding: 0;
+	background-color: transparent;
+	border: 0;
+}
+
+.selections button:focus {
+	outline: none;
+	box-shadow: none;
+}
+
+.selections button img {
+	margin: 0;
+}
+
+.video {
+	display: flex;
+	position: relative;
+}
+
+.capture-input {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row;
+	margin-bottom: 14px;
+}
+
+.capture-input > .input-box {
+	font-size: 1rem;
+	min-width: 20rem;
+	color: #212121;
+	border-color: #212121;
+}
+
+.capture-input > .input-message {
+	display: flex;
+	margin: auto;
+	margin-right: 6px;
+	text-align: right;
+	vertical-align: middle;
+	min-height: 1rem;
+	font-size: 0.8rem;
+
+}
+
+.capture-input > .input-box::-webkit-input-placeholder {
+	color: #212121;
 }

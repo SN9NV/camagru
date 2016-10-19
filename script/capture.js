@@ -3,8 +3,18 @@ var canvas;
 var draw;
 var selectedOverlay = "frame0";
 var file;
+var overlays = [
+	'frame0',
+	'crown',
+	'pahe',
+	'paheThought',
+	'dickbuttNigel',
+	'harambe',
+	'emma'
+];
 
 function setupWebcam() {
+	addClass(document.getElementById('video-error'), 'hidden');
 	file = document.getElementById('upload-image');
 	   file.addEventListener('change', resizeUpload, false);
     video = document.getElementById('video-webcam');
@@ -23,15 +33,24 @@ function setupWebcam() {
     navigator.mediaDevices.getUserMedia(constraints)
         .then(handleSuccess)
         .catch(handleError);
+
+	createButtons();
 }
 
 function snapshot() {
+	document.getElementById('video').style.display = "none";
+	removeClass(document.getElementById('canvas'), 'hidden');
 	draw.setTransform(1, 0, 0, 1, 0, 0);
 	draw.clearRect(0, 0, canvas.width, canvas.height);
 	draw.translate(canvas.width, 0);
 	draw.scale(-1, 1);
 	draw.drawImage(video, 0, 0, canvas.width, canvas.height);
 	document.getElementById('save-image').disabled = false;
+}
+
+function backToVideo() {
+	document.getElementById('video').style.display = "flex";
+	addClass(document.getElementById('canvas'), 'hidden');
 }
 
 function handleSuccess(stream) {
@@ -41,6 +60,8 @@ function handleSuccess(stream) {
 
 function handleError(error) {
     console.log('video error: ' + error);
+	document.getElementById('video').style.display = "none";
+	removeClass(document.getElementById('video-error'), 'hidden');
 }
 
 function saveImage() {
@@ -79,11 +100,30 @@ function resizeUpload(e) {
 		};
 		img.src = event.target.result;
 	};
-	if (e.target.files[0].type.match("image.*")) {
+	if (e.target.files[0] && e.target.files[0].type.match("image.*")) {
 		reader.readAsDataURL(e.target.files[0]);
-		document.getElementById('capture-error').innerHTML = "";
+		document.getElementById('upload-image-message').innerHTML = "";
 	} else {
 		console.log("Selected file is not an image");
-		document.getElementById('capture-error').innerHTML = "Selected file is not an image";
+		document.getElementById('upload-image-message').innerHTML = "Selected file is not an image";
 	}
+}
+
+function createButtons() {
+/*
+	<button onclick="selectOverlay('frame0')">
+		<img src="img/ic_frame0.png" />
+	</button>
+*/
+	var parent = document.getElementById('selections');
+	overlays.forEach(function(item) {
+		var button = document.createElement('button');
+		button.onclick = function() {
+			selectOverlay(item);
+		};
+		var img = document.createElement('img');
+		img.src = "img/ic_" + item + ".png";
+		button.appendChild(img);
+		parent.appendChild(button);
+	});
 }

@@ -1,41 +1,32 @@
 <!DOCTYPE html>
-<div style="display: flex; flex-direction: row; flex-wrap">
-	<div id="selections" style="display: flex; flex-direction: column; flex-wrap">
-		<button class="overlay-button" onclick="selectOverlay('frame0')">
-			<img src="img/ic_frame0.png" class="overlay-icon" />
-		</button>
-		<button class="overlay-button" onclick="selectOverlay('crown')">
-			<img src="img/ic_crown.png" class="overlay-icon" />
-		</button>
-		<button class="overlay-button" onclick="selectOverlay('pahe')">
-			<img src="img/ic_pahe.png" class="overlay-icon" />
-		</button>
-		<button class="overlay-button" onclick="selectOverlay('paheThought')">
-			<img src="img/ic_paheThought.png" class="overlay-icon" />
-		</button>
-		<button class="overlay-button" onclick="selectOverlay('dickbuttNigel')">
-			<img src="img/ic_dickbuttNigel.png" class="overlay-icon" />
-		</button>
-		<button class="overlay-button" onclick="selectOverlay('harambe')">
-			<img src="img/ic_harambe.png" class="overlay-icon" />
-		</button>
-	</div>
-	<div style="display: flex; flex-direction: column; flex-wrap">
-		<div style="display: flex; position: relative">
+<div class="center-div">
+	<div style="display: flex; flex-direction: column; flex-wrap: wrap; padding: 25px; background-color: #FF5722; border-radius: 10px">
+		<h4 style="margin: 3px; text-align: center">Please choose an overlay</h4>
+		<div id="selections" class="selections"></div>
+		<h4 style="margin: 3px; text-align: center">Click the video window to take a snap shot, click again to go back</h4>
+		<div id="video" class="video">
 			<video id="video-webcam" class="webcamVideo" autoplay></video>
-			<img id="video-overlay" src="img/frame0.png" class="overlay" />
+			<img id="video-overlay" src="img/frame0.png" class="overlay" onclick="snapshot()" />
 		</div>
-		<div style="display: flex; justify-content: space-around">
-			<button onclick="snapshot()">Take Picture</button>
-			OR
-			<input type="file" id="upload-image" name="Upload image" />
-			<button id="save-image" onclick="saveImage()" disabled>Save</button>
+		<span id="video-error" class="hidden">There was an error starting the webcam<br />Please choose a image file instead</span>
+		<div id="canvas" class="canvas hidden">
+			<div style="display: flex; position: relative; width: 480px; height: 360px">
+				<canvas id="picture-canvas" style="width: 100%; height: 100%"></canvas>
+				<img id="canvas-overlay" src="img/frame0.png" class="overlay" onclick="backToVideo()" />
+			</div>
 		</div>
-		Title of your creation: <input id="image-title" type="text" />
-		<span id="capture-error" style="color: tomato"></span>
-	</div>
-	<div style="display: flex; position: relative; width: 480px; height: 360px">
-		<canvas id="picture-canvas" style="width: 100%; height: 100%"></canvas>
-		<img id="canvas-overlay" src="img/frame0.png" class="overlay" />
+		<div style="display: flex; flex-direction: column">
+			<div class="capture-input">
+				<input type="file" id="upload-image" name="Upload image" />
+				<span id="upload-image-message" class="input-message"></span>
+			</div>
+			<div style="display: flex; flex-direction: row">
+				<div class="capture-input">
+					<input id="image-title" class="input-box" type="text" placeholder="Title of your creation" />
+					<span id="capture-error" class="input-message"></span>
+				</div>
+				<button id="save-image" onclick="saveImage()" disabled>Save</button>
+			</div>
+		</div>
 	</div>
 </div>
