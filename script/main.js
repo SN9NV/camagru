@@ -28,8 +28,8 @@ function login(usernameValue, passwordValue) {
     if (passwordValue === undefined) {
         passwordValue = password.value;
     }
-	username.value = "";
-	password.value = "";
+    username.value = "";
+    password.value = "";
 
     ajaxPost(
         "php/login.php",
@@ -43,7 +43,7 @@ function login(usernameValue, passwordValue) {
             } else {
                 showLogout();
             }
-			ShowHideButton();
+            ShowHideButton();
         });
 }
 
@@ -66,7 +66,7 @@ function logout() {
         } else {
             console.log("Oh no");
         }
-		ShowHideButton();
+        ShowHideButton();
     });
 }
 
@@ -113,44 +113,62 @@ function changePage(url) {
     }
     if (url === "" || url === "#/" || url === "#") {
         loadPartial("home.html", function() {
-			ShowHideButton();
-			getImages();
-		});
+            ShowHideButton();
+            getImages();
+        });
         history.replaceState(null, null, "#");
         return;
     }
-	if (url.match(/#\/confirm\/.+/)) {
-		var uri = 'uri=' + url.substring(url.indexOf('confirm/') + 8);
-		ajaxPost("php/confirm.php", uri, function(response) {
-			var result = JSON.parse(response);
-			if (JSON.parse(result)) {
-				loadPartial("confirmed.html");
-			} else {
-				loadPartial("confirm_error.html");
-			}
-		});
-		loadPartial("confirming.html");
-	}
-    switch (url) {
-        case "#/register":
-            {
-                loadPartial("create_user.html");
-                break;
+    if (url.match(/#\/confirm\/.+/)) {
+        var uri = 'uri=' + url.substring(url.indexOf('confirm/') + 8);
+        ajaxPost("php/confirm.php", uri, function(response) {
+            var result = JSON.parse(response);
+            if (JSON.parse(result)) {
+                loadPartial("confirmed.html");
+            } else {
+                loadPartial("confirm_error.html");
             }
-        case "#/capture":
-            {
-                loadPartial("capture.html", setupWebcam);
-                break;
-            }
-		case "#/check_email":
-			{
-				loadPartial("check_email.html");
-				break;
-			}
-        default:
-            {
-                loadPartial("404.html");
-            }
+        });
+        loadPartial("confirming.html");
+    }
+    if (url.match(/#\/reset\/?.*/)) {
+		if (url.match(/#\/reset\/.+/)) {
+			loadPartial("reset_password.html");
+		} else {
+			loadPartial("reset.html");
+		}
+    } else {
+        switch (url) {
+            case "#/register":
+                {
+                    loadPartial("create_user.html");
+                    break;
+                }
+            case "#/capture":
+                {
+                    loadPartial("capture.html", setupWebcam);
+                    break;
+                }
+            case "#/check_email":
+                {
+                    loadPartial("check_email.html");
+                    break;
+                }
+            case "#/check_email_reset":
+                {
+                    loadPartial("check_email_reset.html");
+                    break;
+                }
+            case "#/reset_success":
+                {
+                    loadPartial("reset_success.html");
+                    break;
+                }
+            default:
+                {
+                    loadPartial("404.html");
+                }
+        }
     }
 }
 
@@ -159,5 +177,5 @@ window.onhashchange = function() {
 };
 
 function ShowHideButton() {
-	document.getElementById('add-button').style.display = (user) ? "flex" : "none";
+    document.getElementById('add-button').style.display = (user) ? "flex" : "none";
 }

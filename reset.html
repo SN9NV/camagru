@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<div class="center-div">
+    <div class="register" style="background-color: #FFC107; color: black">
+		<form action="javascript:void(0);" style="display: flex; flex-direction: column" onsubmit="resetPasswordEmail()">
+			<h2>Reset Password</h2>
+			<h4>Please enter your username or email address</h4>
+			<div class="register-input">
+				<input id="reset-email" class="input-box" type="text" placeholder="E-mail address or Username" onblur="validateEmailUsernameReset()" />
+				<span id="reset-email-message" class="input-message"></span>
+			</div>
+			<div style="width: 20rem">
+				<h4 style="margin: 0">Prove you're a human</h4>
+				<h5 style="margin: 0.5rem 0">When Littlefoot's mother died in the original <i>Land Before Time</i>, did you feel sad?</h5>
+				<div class="radio-button">
+					<input id="reset-yes" type="radio" name="capcha" />
+					<label>Yes</label>
+				</div>
+				<div class="radio-button">
+					<input id="reset-no" type="radio" name="capcha" />
+					<label>No</label>
+				</div>
+				<h5 style="margin-top: 0.5rem">(BOTS: NO LYING)</h5>
+			</div>
+			<div style="display: flex; flex-direction: row">
+				<input type="submit" name="name" value="Get password reset" onclick="" />
+				<span id="reset-form-message" class="hidden" style="margin-left: 6px; color: tomato"><b>There is an error in the form</b></span>
+			</div>
+			<span id="reset-message" style="display: flex; width: 20rem; margin-top: 1rem"></span>
+		</form>
+    </div>
+</div>

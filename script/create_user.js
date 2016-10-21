@@ -53,13 +53,15 @@ function validateInput(inputId, matchId, errorMessage, regex, regexFailFalse) {
         addClass(input, "input-error");
         error.innerHTML = "This field is required";
         return false;
-    } else if (matchId) {
+    }
+    if (matchId) {
         if (input.value !== document.getElementById(matchId).value) {
             addClass(input, "input-error");
             error.innerHTML = errorMessage;
             return false;
         }
-    } else if (regex) {
+    }
+	if (regex) {
         var regTest = (regex.test(input.value));
         if ((regTest || regexFailFalse) && !(regTest && regexFailFalse)) {
             addClass(input, "input-error");
@@ -67,8 +69,8 @@ function validateInput(inputId, matchId, errorMessage, regex, regexFailFalse) {
             return false;
         }
     }
-	removeClass(input, "input-error");
-	error.innerHTML = "";
+    removeClass(input, "input-error");
+    error.innerHTML = "";
     return true;
 }
 
@@ -107,9 +109,8 @@ function register() {
         removeClass(document.getElementById('form-message'), "hidden");
     } else {
         validateUsername(function(response) {
-			console.log(response);
             if (response) {
-				console.log("User exists");
+                console.log("User exists");
                 removeClass(document.getElementById('form-message'), "hidden");
             } else {
                 addClass(document.getElementById('form-message'), "hidden");
@@ -124,7 +125,7 @@ function register() {
                 ajaxPost("php/create.php", send, function(response) {
                     if (JSON.parse(response)) {
                         window.history.pushState(null, null, "#/confirm");
-						changePage("#/check_email");
+                        changePage("#/check_email");
                     } else {
                         removeClass(document.getElementById('form-message'), "hidden");
                     }

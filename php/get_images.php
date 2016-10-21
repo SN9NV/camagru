@@ -39,28 +39,7 @@ try {
 		LIMIT 50
 		OFFSET :offsetval;");
 
-/*
-SELECT
-            images.id AS 'id',
-            users.username AS 'username',
-            users.profilepic AS userpic,
-            images.title AS 'title',
-            unix_timestamp(images.date) AS 'date',
-            (CASE WHEN images.userid = 19 THEN 1 ELSE 0 END) AS 'creator',
-            (CASE WHEN likes.userid = 19 THEN 1 ELSE 0 END) AS 'liked',
-            (SELECT COUNT(id) FROM comments WHERE comments.imgid = images.id) AS 'comments',
-            (SELECT COUNT(id) FROM likes WHERE likes.imgid = images.id) AS 'likes'
-        FROM images
-            LEFT JOIN users
-                ON images.userid = users.id
-            LEFT JOIN likes
-                ON images.id = likes.imgid AND likes.userid = 19
-        GROUP BY
-            images.id
-        ORDER BY `date` DESC
-        LIMIT 50
-        OFFSET 0;
-*/    $sql->bindValue(':offsetval', $offset, PDO::PARAM_INT);
+    $sql->bindValue(':offsetval', $offset, PDO::PARAM_INT);
     $sql->bindValue(':userid', $user, PDO::PARAM_INT);
     $sql->execute();
     $images = $sql->fetchAll(PDO::FETCH_CLASS);
