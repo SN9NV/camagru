@@ -119,6 +119,19 @@ function changePage(url) {
         history.replaceState(null, null, "#");
         return;
     }
+	if (url.match(/#\/confirm\/.+/)) {
+		console.log("confirm email");
+		var uri = 'uri=' + url.substring(url.indexOf('confirm/') + 8);
+		ajaxPost("php/confirm.php", uri, function(response) {
+			var result = JSON.parse(response);
+			if (JSON.parse(result)) {
+				loadPartial("confirmed.html");
+			} else {
+				loadPartial("confirm_error.html");
+			}
+		});
+		loadPartial("confirming.html");
+	}
     switch (url) {
         case "#/register":
             {

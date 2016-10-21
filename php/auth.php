@@ -1,5 +1,8 @@
 <?php
 function auth ($login, $passwd) {
+	if (preg_match('/^?.*/', $login)) {
+		return false;
+	}
 	$passwd = hash('whirlpool', $passwd);
 	try {
 		$server = "localhost";

@@ -44,15 +44,17 @@ function timeSince(date) {
     return Math.floor(seconds) + " seconds ago";
 }
 
-function getImages() {
+function getImages(noDestroyChildren) {
     ajaxPost("php/get_images.php", null, function(response) {
         var result = JSON.parse(response);
         console.log(result);
         if (result !== "Database error") {
             var gallery = document.getElementById('gallery');
-            while (gallery.hasChildNodes()) {
-                gallery.removeChild(gallery.lastChild);
-            }
+			if (!noDestroyChildren) {
+				while (gallery.hasChildNodes()) {
+	                gallery.removeChild(gallery.lastChild);
+	            }
+			}
             result.forEach(function(item) {
                 //create article
                 var article = document.createElement('article');
@@ -116,15 +118,20 @@ function getImages() {
                 favouriteButton.onclick = function() {
                     galleryFavourite(item.id);
                 };
+				favouriteButton.appendChild(document.createTextNode(item.likes));
                 var favouriteIcon = document.createElement('i');
                 favouriteIcon.classList = "material-icons";
                 favouriteIcon.innerText = "favorite";
                 favouriteIcon.id = item.id + "favourite";
+				if (item.liked) {
+					favouriteIcon.style.color = "#F44336";
+				}
                 favouriteButton.appendChild(favouriteIcon);
                 var commentButton = document.createElement('button');
                 commentButton.onclick = function() {
                     galleryComment(item.id);
                 };
+				commentButton.appendChild(document.createTextNode(item.comments));
                 var commentIcon = document.createElement('i');
                 commentIcon.classList = "material-icons";
                 commentIcon.innerText = "comment";
@@ -186,7 +193,9 @@ function galleryFavourite(id) {
             var result = JSON.parse(response);
             console.log(result);
             if (result) {
-                document.getElementById(id + "favourite").style.color = "red";
+				var fav = document.getElementById(id + "favourite");
+                fav.style.color = "red";
+				console.log(fav.nodeValue);
             }
         });
     } else {
@@ -198,14 +207,17 @@ function galleryComment(id) {
     console.log("Comment " + id);
     if (user) {
         var send = "imgid=" + id;
-        var comment = "&comment=" + document.getElementById(id + 'commentTextBox').value;
+        var comment = document.getElementById(id + 'commentTextBox').value;
         if (comment !== null) {
-            send += comment;
+            send += "&comment=" + comment;
             ajaxPost("php/comment.php", send, function(response) {
                 var result = JSON.parse(response);
                 console.log(result);
                 if (result) {
-                    document.getElementById(id + "favourite").style.color = "red";
+					var comment = document.getElementById(id + "comment");
+                    fav.style.color = "red";
+					console.log(fav.childNodes[0].nodeValue);
+					fav.childNodes[0].nodeValue = parseInt(fav.childNodes[0].nodeValue) + 1;
                 }
             });
         }
