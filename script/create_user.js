@@ -124,7 +124,7 @@ function register() {
                 ajaxPost("php/create.php", send, function(response) {
                     if (JSON.parse(response)) {
                         window.history.pushState(null, null, "#/confirm");
-						changePage("#/confirm");
+						changePage("#/check_email");
                     } else {
                         removeClass(document.getElementById('form-message'), "hidden");
                     }

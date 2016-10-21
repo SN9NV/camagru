@@ -9,7 +9,7 @@ if ($_POST['uri']) {
         $server = 'localhost';
         $dbname = 'camagru';
 
-        $uri = urldecode($_POST['uri']);
+        $uri = $_POST['uri'];
 		$ciphertext_dec = base64_decode($uri);
 		$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
 		$iv_dec = substr($ciphertext_dec, 0, $iv_size);
@@ -23,6 +23,7 @@ if ($_POST['uri']) {
         $sql = $conn->prepare('UPDATE users SET username = SUBSTR(username, 2) WHERE username = :username;');
         $sql->execute([':username' => $username]);
 
+		file_put_contents("log.log", $sql->rowCount."\n".$username."\n".$_POST['uri'], FILE_APPEND);
 		if ($sql->rowCount() > 0) {
 			echo json_encode(true);
 		} else {

@@ -4,21 +4,16 @@ session_start();
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=UTF-8');
 
-//if ($_POST['first'] && $_POST['last'] && $_POST['user'] && $_POST['passwd'] && $_POST['email']) {
+if ($_POST['first'] && $_POST['last'] && $_POST['user'] && $_POST['passwd'] && $_POST['email']) {
     try {
         $server = 'localhost';
         $dbname = 'camagru';
 
-        /*$first = $_POST['first'];
+        $first = $_POST['first'];
         $last = $_POST['last'];
         $user = '?'.$_POST['user'];
         $email = $_POST['email'];
-        $passwd = hash('whirlpool', $_POST['passwd']); */
-		$first = "Angus";
-		$last = "Dippenaar";
-		$user = "SN9NV";
-		$email = "yoloswaggins@mailinator.com";
-		$passwd = hash('whirlpool', "asdf");
+        $passwd = hash('whirlpool', $_POST['passwd']);
 
 		$key = pack('H*', 'B2929BFB7E57F934D7D0E2CA994884B4E4EF1C27AC742D52A73699309D16698F');
         $iv = mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC), MCRYPT_RAND);
@@ -46,6 +41,6 @@ header('Content-Type: application/json; charset=UTF-8');
         echo json_encode(false);
     }
     $conn = null;
-//} else {
-//    echo json_encode(false);
-//}
+} else {
+    echo json_encode(false);
+}

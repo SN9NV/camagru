@@ -120,7 +120,6 @@ function changePage(url) {
         return;
     }
 	if (url.match(/#\/confirm\/.+/)) {
-		console.log("confirm email");
 		var uri = 'uri=' + url.substring(url.indexOf('confirm/') + 8);
 		ajaxPost("php/confirm.php", uri, function(response) {
 			var result = JSON.parse(response);
@@ -143,6 +142,11 @@ function changePage(url) {
                 loadPartial("capture.html", setupWebcam);
                 break;
             }
+		case "#/check_email":
+			{
+				loadPartial("check_email.html");
+				break;
+			}
         default:
             {
                 loadPartial("404.html");
