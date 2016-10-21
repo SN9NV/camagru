@@ -45,8 +45,12 @@ function resetPassword() {
 		var send = "uri=" + uri.replace(/^.*\/#\/reset\//, '');
 		send += "&passwd=" + document.getElementById('reset-password').value;
 		console.log(send);
-		ajaxPost("php/change_password.php", send, function() {
-
+		ajaxPost("php/change_password.php", send, function(response) {
+			if (JSON.parse(response)) {
+				loadPartial("reset_success.html");
+			} else {
+				document.getElementById('reset-message').innerText = "Error changing password";
+			}
 		});
 	} else {
 		removeClass(document.getElementById('reset-form-message'), "hidden");

@@ -17,7 +17,6 @@ try {
 	if ($sql->rowCount() === 1) {
 		$user = $sql->fetch(PDO::FETCH_ASSOC);
 	} else {
-		echo "row count";
 		die(json_encode(false));
 	}
 
@@ -35,12 +34,10 @@ try {
     if (mail($user['email'], 'Camagru password reset', $message, $headers)) {
 		echo json_encode(true);
 	} else {
-		echo "Mail error";
 		echo json_encode(false);
 	}
 } catch (Exception $e) {
     error_log($e, 3, '/home/angus/Documents/wtc/camagru/log/errors.log');
-	echo $e;
     echo json_encode(false);
 }
 $conn = null;

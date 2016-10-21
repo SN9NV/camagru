@@ -42,6 +42,7 @@ function login(usernameValue, passwordValue) {
                 document.getElementById("login_error").style.display = "flex";
             } else {
                 showLogout();
+				history.pushState("#");
             }
             ShowHideButton();
         });
@@ -63,6 +64,7 @@ function logout() {
         user = JSON.parse(response);
         if (!user) {
             showLogin();
+			history.pushState(null, null, "#");
         } else {
             console.log("Oh no");
         }
