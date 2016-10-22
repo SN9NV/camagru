@@ -1,3 +1,5 @@
+var pahe = 0;
+
 function timeSince(date) {
     var seconds = Math.floor((new Date().getTime() / 1000) - date);
     var month = new Array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
@@ -44,8 +46,12 @@ function timeSince(date) {
     return Math.floor(seconds) + " seconds ago";
 }
 
-function getImages(noDestroyChildren) {
-    ajaxPost("php/get_images.php", null, function(response) {
+function getImages(noDestroyChildren, page) {
+	var pageNum = 0;
+	if (page !== undefined) {
+		pageNum = pahe;
+	}
+    ajaxPost("php/get_images.php", "offset=" + pageNum, function(response) {
         var result = JSON.parse(response);
         console.log(result);
         if (result !== "Database error") {
@@ -135,9 +141,6 @@ function getImages(noDestroyChildren) {
 				}
                 favouriteButton.appendChild(favouriteIcon);
                 var commentButton = document.createElement('button');
-                commentButton.onclick = function() {
-                    galleryComment(item.id);
-                };
 				var comments = document.createElement("span");
 				comments.id = item.id + "comments";
 				comments.innerText = item.comments;
@@ -165,7 +168,10 @@ function getImages(noDestroyChildren) {
                 comment.classList = "comment";
                 if (item.title) {
                     var span = document.createElement('span');
-                    span.innerHTML = "<b>" + item.username + "</b> " + item.title;
+					var bold = document.createElement('b');
+					bold.innerText = item.username;
+                    span.innerText = item.title;
+					comment.appendChild(bold);
                     comment.appendChild(span);
                 }
 
@@ -182,15 +188,22 @@ function getImages(noDestroyChildren) {
 				section.appendChild(sectionClose);
 				var sectionComments = document.createElement('div');
 				sectionComments.id = item.id + "comments-section-comments";
+				sectionComments.classList = "comments";
 				if (item.title) {
+					var commentDiv = document.createElement('div');
 					var commentSpan = document.createElement('span');
-					commentSpan.innerHTML = "<b>" + item.username + "</b> " + item.title;
-					sectionComments.appendChild(commentSpan);
+					var commentbold = document.createElement('b');
+					commentbold.innerText = item.username;
+					commentSpan.innerText = item.title;
+					commentDiv.appendChild(commentbold);
+					commentDiv.appendChild(commentSpan);
+					sectionComments.appendChild(commentDiv);
 				}
 				var sectionComment = document.createElement('div');
 				sectionComment.classList = "sectionComment";
 				var textbox = document.createElement('input');
 				textbox.type = "textarea";
+				textbox.maxLength = "128";
 				textbox.placeholder = "Comment";
 				textbox.id = item.id + "commentTextBox";
 				textbox.classList = "input-box";
@@ -253,6 +266,7 @@ function galleryComment(id) {
                 if (result) {
 					var comments = document.getElementById(id + "comments");
 					comments.innerText = parseInt(comments.innerText) + 1;
+					comment = "";
 					galleryGetComments(id);
                 }
             });
@@ -264,7 +278,30 @@ function galleryComment(id) {
 }
 
 function galleryGetComments(id) {
-
+	ajaxPost("php/get_comments.php", "id=" + id, function(response) {
+		var result = JSON.parse(response);
+		console.log(result);
+		if (result) {
+			sectionComments = document.getElementById(id + "comments-section-comments");
+			while (sectionComments.childNodes.length > result.title) {
+				sectionComments.removeChild(sectionComments.lastChild);
+			}
+			result.comments.forEach(function(item) {
+				if (item.comment) {
+					var div = document.createElement('div');
+					var commentSpan = document.createElement('span');
+					var bold = document.createElement('b');
+					bold.innerText = item.username;
+					commentSpan.innerText = item.comment;
+					div.appendChild(bold);
+					div.appendChild(commentSpan);
+					sectionComments.appendChild(div);
+				}
+			});
+		} else {
+			console.log("error");
+		}
+	});
 }
 
 function galleryDelete(id) {
@@ -279,3 +316,15 @@ function openSection(id) {
 	galleryGetComments(id);
 	document.getElementById(id + "comments-section").style.transform = "translateY(-100%)";
 }
+
+window.onscroll = function detectEnd(ev) {
+	console.log("scroll");
+	if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+		console.log("At the bottom");
+		if (window.location.hash === "") {
+			console.log("Home");
+			pahe = pahe + 1;
+			getImages(true, pahe);
+		}
+	}
+};

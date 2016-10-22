@@ -355,7 +355,7 @@ video {
 	transition: 0.5s ease;
 }
 
-.comments-section div {
+.comments-section > div {
 	padding: 20px;
 }
 
@@ -382,19 +382,22 @@ video {
 .sectionComment {
 	display: flex;
 	flex-direction: row;
+	flex: auto;
+	align-items: center;
 	position: absolute;
 	bottom: 0;
 	left: 0;
+	right: 0;
 }
 
 .sectionComment button {
 	background-color: transparent;
+	display: flex;
+	position: relative;
 	border: 0;
-	padding: 6px;
+	top: auto;
+	right: auto;
 	cursor: pointer;
-	position: absolute;
-	top: 6px;
-	right: 6px;
 	font-family: 'Material Icons';
     font-weight: normal;
 	font-size: 24px;
@@ -403,9 +406,32 @@ video {
 }
 
 .sectionComment input {
+	display: flex;
 	color: #000;
+	width: 20rem;
 }
 
 .sectionComment input::-webkit-input-placeholder {
 	color: #212121;
+}
+
+.comments {
+	display: flex;
+	flex-direction: column;
+	margin-top: 45px;
+	overflow-y: auto;
+	height: 360px;
+	word-wrap: break-word;
+}
+
+.comments span {
+	margin: 0.125rem;
+}
+
+.comment b {
+	margin-right: 0.3em;
+}
+
+.comments b {
+	margin-right: 0.3em;
 }

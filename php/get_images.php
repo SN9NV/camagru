@@ -12,7 +12,7 @@ try {
         $user = $_SESSION['logged_on_user']['id'];
     }
     if ($_POST['offset']) {
-        $offset = intval($_POST['offset']);
+        $offset = intval($_POST['offset']) * 6;
     }
 
     $conn = new PDO("mysql:host=$server;dbname=$dbname", 'root', 'sparewheel');
@@ -36,7 +36,7 @@ try {
 		GROUP BY
 			images.id
 		ORDER BY `date` DESC
-		LIMIT 50
+		LIMIT 6
 		OFFSET :offsetval;");
 
     $sql->bindValue(':offsetval', $offset, PDO::PARAM_INT);
