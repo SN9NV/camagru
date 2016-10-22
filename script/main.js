@@ -6,6 +6,7 @@ var login_name = document.getElementById("login_name");
 var username = document.getElementById('username');
 var password = document.getElementById('password');
 var lastImage = 0;
+var pahe = 0;
 whoami();
 changePage(window.location.hash);
 
@@ -117,6 +118,7 @@ function changePage(url) {
 		console.log("Home");
         loadPartial("home.html", function() {
             ShowHideButton();
+			pahe = 0;
             getImages();
         });
         history.replaceState(null, null, "#");

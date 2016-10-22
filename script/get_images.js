@@ -1,5 +1,3 @@
-var pahe = 0;
-
 function timeSince(date) {
     var seconds = Math.floor((new Date().getTime() / 1000) - date);
     var month = new Array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
@@ -175,7 +173,6 @@ function getImages(noDestroyChildren, page) {
                     comment.appendChild(span);
                 }
 
-
 				//comments section
 				var section = document.createElement('div');
 				section.classList = "comments-section";
@@ -199,24 +196,25 @@ function getImages(noDestroyChildren, page) {
 					commentDiv.appendChild(commentSpan);
 					sectionComments.appendChild(commentDiv);
 				}
-				var sectionComment = document.createElement('div');
-				sectionComment.classList = "sectionComment";
-				var textbox = document.createElement('input');
-				textbox.type = "textarea";
-				textbox.maxLength = "128";
-				textbox.placeholder = "Comment";
-				textbox.id = item.id + "commentTextBox";
-				textbox.classList = "input-box";
-				sectionComment.appendChild(textbox);
-				var commentSendButton = document.createElement('button');
-				commentSendButton.innerText = "send";
-				commentSendButton.onclick = function() {
-					galleryComment(item.id);
-				};
-				sectionComment.appendChild(commentSendButton);
 				section.appendChild(sectionComments);
-				section.appendChild(sectionComment);
-
+				if (user) {
+					var sectionComment = document.createElement('div');
+					sectionComment.classList = "sectionComment";
+					var textbox = document.createElement('input');
+					textbox.type = "textarea";
+					textbox.maxLength = "128";
+					textbox.placeholder = "Comment";
+					textbox.id = item.id + "commentTextBox";
+					textbox.classList = "input-box";
+					sectionComment.appendChild(textbox);
+					var commentSendButton = document.createElement('button');
+					commentSendButton.innerText = "send";
+					commentSendButton.onclick = function() {
+						galleryComment(item.id);
+					};
+					sectionComment.appendChild(commentSendButton);
+					section.appendChild(sectionComment);
+				}
 
                 //append children to footer
                 footer.appendChild(actions);
@@ -257,16 +255,16 @@ function galleryComment(id) {
     console.log("Comment " + id);
     if (user) {
         var send = "imgid=" + id;
-        var comment = document.getElementById(id + 'commentTextBox').value;
-        if (comment !== null) {
-            send += "&comment=" + comment;
+        var comment = document.getElementById(id + 'commentTextBox');
+        if (comment.value !== null) {
+            send += "&comment=" + comment.value;
             ajaxPost("php/comment.php", send, function(response) {
                 var result = JSON.parse(response);
                 console.log(result);
                 if (result) {
 					var comments = document.getElementById(id + "comments");
 					comments.innerText = parseInt(comments.innerText) + 1;
-					comment = "";
+					comment.value = "";
 					galleryGetComments(id);
                 }
             });
@@ -306,6 +304,13 @@ function galleryGetComments(id) {
 
 function galleryDelete(id) {
     console.log("Delete " + id);
+	ajaxPost("php/delete.php", "id=" + id, function(response) {
+		if (JSON.parse(response)) {
+			document.getElementById('gallery').removeChild(document.getElementById(id));
+		} else {
+			console.log("Error removing image");
+		}
+	});
 }
 
 function closeSection(id) {
