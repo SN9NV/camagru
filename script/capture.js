@@ -10,7 +10,9 @@ var overlays = [
 	'paheThought',
 	'dickbuttNigel',
 	'harambe',
-	'emma'
+	'emma',
+	'wasted',
+	'busted'
 ];
 
 function setupWebcam() {

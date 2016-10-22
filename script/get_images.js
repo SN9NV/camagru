@@ -59,6 +59,7 @@ function getImages(noDestroyChildren) {
                 //create article
                 var article = document.createElement('article');
                 article.id = item.id;
+				article.classList = "article-image";
 
                 /*	create header
                 	<header>
@@ -90,6 +91,9 @@ function getImages(noDestroyChildren) {
                 */
                 var img = document.createElement('img');
                 img.src = "images/" + item.id + ".png";
+				img.onclick = function() {
+					openSection(item.id);
+				};
 
                 /*	create footer
                 	<footer>
@@ -118,7 +122,10 @@ function getImages(noDestroyChildren) {
                 favouriteButton.onclick = function() {
                     galleryFavourite(item.id);
                 };
-				favouriteButton.appendChild(document.createTextNode(item.likes));
+				var likes = document.createElement("span");
+				likes.id = item.id + "likes";
+				likes.innerText = item.likes;
+				favouriteButton.appendChild(likes);
                 var favouriteIcon = document.createElement('i');
                 favouriteIcon.classList = "material-icons";
                 favouriteIcon.innerText = "favorite";
@@ -131,7 +138,10 @@ function getImages(noDestroyChildren) {
                 commentButton.onclick = function() {
                     galleryComment(item.id);
                 };
-				commentButton.appendChild(document.createTextNode(item.comments));
+				var comments = document.createElement("span");
+				comments.id = item.id + "comments";
+				comments.innerText = item.comments;
+				commentButton.appendChild(comments);
                 var commentIcon = document.createElement('i');
                 commentIcon.classList = "material-icons";
                 commentIcon.innerText = "comment";
@@ -158,17 +168,42 @@ function getImages(noDestroyChildren) {
                     span.innerHTML = "<b>" + item.username + "</b> " + item.title;
                     comment.appendChild(span);
                 }
+
+
+				//comments section
+				var section = document.createElement('div');
+				section.classList = "comments-section";
+				section.id = item.id + "comments-section";
+				var sectionClose = document.createElement('button');
+				sectionClose.innerText = "close";
+				sectionClose.onclick = function() {
+					closeSection(item.id);
+				};
+				section.appendChild(sectionClose);
+				var sectionComments = document.createElement('div');
+				sectionComments.id = item.id + "comments-section-comments";
+				if (item.title) {
+					var commentSpan = document.createElement('span');
+					commentSpan.innerHTML = "<b>" + item.username + "</b> " + item.title;
+					sectionComments.appendChild(commentSpan);
+				}
+				var sectionComment = document.createElement('div');
+				sectionComment.classList = "sectionComment";
 				var textbox = document.createElement('input');
-				textbox.type = "textbox";
+				textbox.type = "textarea";
 				textbox.placeholder = "Comment";
 				textbox.id = item.id + "commentTextBox";
-				comment.appendChild(textbox);
+				textbox.classList = "input-box";
+				sectionComment.appendChild(textbox);
 				var commentSendButton = document.createElement('button');
-				commentSendButton.innerText = "Send";
+				commentSendButton.innerText = "send";
 				commentSendButton.onclick = function() {
 					galleryComment(item.id);
 				};
-				comment.appendChild(commentSendButton);
+				sectionComment.appendChild(commentSendButton);
+				section.appendChild(sectionComments);
+				section.appendChild(sectionComment);
+
 
                 //append children to footer
                 footer.appendChild(actions);
@@ -178,6 +213,7 @@ function getImages(noDestroyChildren) {
                 article.appendChild(header);
                 article.appendChild(img);
                 article.appendChild(footer);
+				article.appendChild(section);
 
                 //append article to gallery
                 gallery.appendChild(article);
@@ -195,7 +231,8 @@ function galleryFavourite(id) {
             if (result) {
 				var fav = document.getElementById(id + "favourite");
                 fav.style.color = "red";
-				console.log(fav.nodeValue);
+				var likes = document.getElementById(id + "likes");
+				likes.innerText = parseInt(likes.innerText) + 1;
             }
         });
     } else {
@@ -214,10 +251,9 @@ function galleryComment(id) {
                 var result = JSON.parse(response);
                 console.log(result);
                 if (result) {
-					var comment = document.getElementById(id + "comment");
-                    fav.style.color = "red";
-					console.log(fav.childNodes[0].nodeValue);
-					fav.childNodes[0].nodeValue = parseInt(fav.childNodes[0].nodeValue) + 1;
+					var comments = document.getElementById(id + "comments");
+					comments.innerText = parseInt(comments.innerText) + 1;
+					galleryGetComments(id);
                 }
             });
         }
@@ -227,6 +263,19 @@ function galleryComment(id) {
 
 }
 
+function galleryGetComments(id) {
+
+}
+
 function galleryDelete(id) {
     console.log("Delete " + id);
+}
+
+function closeSection(id) {
+	document.getElementById(id + "comments-section").style.transform = "translateY(0px)";
+}
+
+function openSection(id) {
+	galleryGetComments(id);
+	document.getElementById(id + "comments-section").style.transform = "translateY(-100%)";
 }

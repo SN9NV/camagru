@@ -42,7 +42,7 @@ function login(usernameValue, passwordValue) {
                 document.getElementById("login_error").style.display = "flex";
             } else {
                 showLogout();
-				history.pushState("#");
+				changePage("");
             }
             ShowHideButton();
         });
@@ -64,7 +64,7 @@ function logout() {
         user = JSON.parse(response);
         if (!user) {
             showLogin();
-			history.pushState(null, null, "#");
+			changePage("");
         } else {
             console.log("Oh no");
         }
@@ -114,6 +114,7 @@ function changePage(url) {
         stream.getTracks()[0].stop();
     }
     if (url === "" || url === "#/" || url === "#") {
+		console.log("Home");
         loadPartial("home.html", function() {
             ShowHideButton();
             getImages();
@@ -166,6 +167,11 @@ function changePage(url) {
                     loadPartial("reset_success.html");
                     break;
                 }
+			case "#/now_what":
+				{
+					loadPartial("now_what.html");
+					break;
+				}
             default:
                 {
                     loadPartial("404.html");
