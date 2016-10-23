@@ -1,16 +1,13 @@
 <?php
-
+include_once "../config/database.php";
 session_start();
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=UTF-8');
 
 try {
-    $server = 'localhost';
-    $dbname = 'camagru';
-
     $value = $_POST['value'];
 
-	$conn = new PDO("mysql:host=$server;dbname=$dbname", 'root', 'sparewheel');
+	$conn = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$sql = $conn->prepare('SELECT id, firstname, lastname, email FROM users WHERE email = :value OR username = :value;');
 	$sql->execute([':value' => $value]);
@@ -26,7 +23,7 @@ try {
     $cyphertext = $iv.$cyphertext;
     $cyphertext_base64 = urlencode(base64_encode($cyphertext));
 
-    $message = '<html><head><title>Confirm your email address</title></head><body><h4>Please click the link below to reset your password on Camagru</h4><br /><a href="http://localhost/#/reset/'.$cyphertext_base64.'">Reset password</a></body></html>';
+    $message = '<html><head><title>Confirm your email address</title></head><body><h4>Please click the link below to reset your password on Camagru</h4><br /><a href="http://localhost:8080/#/reset/'.$cyphertext_base64.'">Reset password</a></body></html>';
     $headers = 'MIME-Version: 1.0'."\r\n";
     $headers .= 'Content-type: text/html; charset=iso-8859-1'."\r\n";
     $headers .= 'To: '.$user['firstname'].' '.$user['lastname'].' <'.$user['email'].'>'."\r\n";

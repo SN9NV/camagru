@@ -1,14 +1,12 @@
 <?php
-
+include_once "../config/database.php";
 session_start();
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=UTF-8');
 try {
-    $server = 'localhost';
-    $dbname = 'camagru';
     $id = $_POST['id'];
 
-    $conn = new PDO("mysql:host=$server;dbname=$dbname", 'root', 'sparewheel');
+    $conn = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $sql = $conn->prepare(
         "SELECT

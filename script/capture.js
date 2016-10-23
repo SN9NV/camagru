@@ -64,6 +64,7 @@ function handleError(error) {
     console.log('video error: ' + error);
 	document.getElementById('video').style.display = "none";
 	removeClass(document.getElementById('video-error'), 'hidden');
+	snapshot();
 }
 
 function saveImage() {

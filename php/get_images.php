@@ -1,11 +1,9 @@
 <?php
-
+include_once "../config/database.php";
 session_start();
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=UTF-8');
 try {
-    $server = 'localhost';
-    $dbname = 'camagru';
     $uesr = 0;
     $offset = 0;
     if ($_SESSION['logged_on_user']) {
@@ -15,7 +13,7 @@ try {
         $offset = intval($_POST['offset']) * 6;
     }
 
-    $conn = new PDO("mysql:host=$server;dbname=$dbname", 'root', 'sparewheel');
+    $conn = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $sql = $conn->prepare(
         "SELECT

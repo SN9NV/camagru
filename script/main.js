@@ -45,7 +45,6 @@ function login(usernameValue, passwordValue) {
                 showLogout();
 				changePage("");
             }
-            ShowHideButton();
         });
 }
 
@@ -69,7 +68,6 @@ function logout() {
         } else {
             console.log("Oh no");
         }
-        ShowHideButton();
     });
 }
 
@@ -117,9 +115,9 @@ function changePage(url) {
     if (url === "" || url === "#/" || url === "#") {
 		console.log("Home");
         loadPartial("home.html", function() {
-            ShowHideButton();
 			pahe = 0;
             getImages();
+			ShowHideButton();
         });
         history.replaceState(null, null, "#");
         return;
@@ -187,5 +185,7 @@ window.onhashchange = function() {
 };
 
 function ShowHideButton() {
-    document.getElementById('add-button').style.display = (user) ? "flex" : "none";
+	if (window.location.hash === "") {
+		document.getElementById('add-button').style.display = (user) ? "flex" : "none";
+	}
 }

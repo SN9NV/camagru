@@ -1,5 +1,3 @@
-var validUsername = false;
-
 function validateFirstname() {
     return validateInput('reg-firstname', null, "Only upper, lowercase and - letters allowed", /[^A-Za-z \']/, false);
 }
@@ -35,7 +33,7 @@ function validateUsername(callback) {
 }
 
 function validatePassword() {
-    return validateInput('reg-password');
+    return validateInput('reg-password', null, "Need at least 3 characters for a password", /.{3,}/, true);
 }
 
 function validatePassword2() {

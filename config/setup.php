@@ -1,8 +1,7 @@
 <?php
+include_once "database.php";
 try {
-	$server = "localhost";
-	$dbname = "camagru";
-	$conn = new PDO("mysql:host=$server", "root", "sparewheel");
+	$conn = new PDO('mysql:host=127.0.0.1;charset=utf8', $DB_USER, $DB_PASSWORD);
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	if ($argc === 2 && $argv[1] == "reinstall") {
 		$conn->exec("DROP DATABASE IF EXISTS camagru;");
@@ -38,7 +37,7 @@ try {
 		date datetime DEFAULT CURRENT_TIMESTAMP NOT NULL);");
 }
 catch (PDOException $e) {
-	error_log($e, 3, "/home/angus/Documents/wtc/camagru/log/errors.log");
+	error_log($e, 3, dirname(__DIR__)."/log/errors.log");
 }
 
 $conn = null;

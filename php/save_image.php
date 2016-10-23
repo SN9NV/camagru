@@ -1,11 +1,10 @@
 <?php
+include_once "../config/database.php";
 session_start();
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=UTF-8');
 if ($_SESSION['logged_on_user']) {
 	try {
-	    $server = 'localhost';
-	    $dbname = 'camagru';
 	    $img = $_POST['img'];
 	    $title = $_POST['title'];
 	    $uid = $_SESSION['logged_on_user']['id'];
@@ -29,7 +28,7 @@ if ($_SESSION['logged_on_user']) {
 	    imagedestroy($im);
 	    imagedestroy($overlay);
 	    if ($success) {
-	        $conn = new PDO("mysql:host=$server;dbname=$dbname", 'root', 'sparewheel');
+	        $conn = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
 	        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	        $sql = $conn->prepare("INSERT INTO `images` (`id`, `userid`, `title`) VALUES (?, ?, ?);");
 	        $sql->execute([$uniqid, $uid, $title]);

@@ -41,9 +41,9 @@ section {
 	justify-content: space-between;
 }
 
-.login-form > .create-account {
+.login-form .create-account {
 	color: white;
-	font-size: 0.8rem;
+	font-size: 0.5rem;
 }
 
 .login-form > .login-error {
@@ -206,6 +206,7 @@ video {
 	margin: 6px;
 	width: 100%;
 	max-width: 480px;
+	height: 504px;
 }
 
 .gallery > article > header {

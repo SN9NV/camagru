@@ -280,6 +280,7 @@ function galleryGetComments(id) {
 		var result = JSON.parse(response);
 		console.log(result);
 		if (result) {
+			console.log(result);
 			sectionComments = document.getElementById(id + "comments-section-comments");
 			while (sectionComments.childNodes.length > result.title) {
 				sectionComments.removeChild(sectionComments.lastChild);

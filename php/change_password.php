@@ -1,14 +1,11 @@
 <?php
-
+include_once "../config/database.php";
 session_start();
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=UTF-8');
 
 if ($_POST['uri']) {
     try {
-        $server = 'localhost';
-        $dbname = 'camagru';
-
         $uri = $_POST['uri'];
 		$passwd = hash('whirlpool', $_POST['passwd']);
 		$ciphertext_dec = base64_decode($uri);
@@ -19,7 +16,7 @@ if ($_POST['uri']) {
 		$id = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $key, $ciphertext_dec, MCRYPT_MODE_CBC, $iv_dec);
 		$id = trim($id);
 
-        $conn = new PDO("mysql:host=$server;dbname=$dbname", 'root', 'sparewheel');
+        $conn = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql = $conn->prepare('UPDATE users SET password = :passwd WHERE id = :id;');
         $sql->execute([':id' => $id, ':passwd' => $passwd]);
